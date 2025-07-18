@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Menu - Sushi Yun & Poke | Orange, CA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto:wght@400&family=Gotu:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Gotu', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f3ed;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: #151515;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        .nav-links a.active {
+            color: #d14642;
+        }
+
+        /* Menu Header */
+        .menu-header {
+            padding-top: 100px;
+            padding-bottom: auto;
+            text-align: center;
+            background: url('image/menuwallpaper.png');
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .menu-header h1 {
+            font-family: 'Aboreto', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .menu-header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        /* Tab Container */
+        .tab-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+
+
+        /* Search Container */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        #search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Gotu', sans-serif;
+            background: #fff;
+        }
+
+        #search-input:focus {
+            border-color: #d14642;
+            box-shadow: 0 0 0 3px rgba(209, 70, 66, 0.1);
+        }
+
+        #search-input::placeholder {
+            color: #999;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+            margin: 2rem 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: #666;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Gotu', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            color: #333;
+        }
+
+        .tab-button.active {
+            color: #333;
+            border-bottom: 2px solid #d14642;
+            font-weight: 600;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Category Header */
+        .category-header {
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            position: relative;
+        }
+
+        .category-header h2 {
+            font-family: 'Aboreto', serif;
+            font-size: 2rem;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            padding: 0 2rem;
+            background: #f8f3ed;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #333;
+            z-index: 0;
+        }
+
+        /* Subcategory Header */
+        .subcategory-header {
+            text-align: left;
+            margin: 2rem 0 1rem 0;
+            border-bottom: 2px solid #d14642;
+            padding-bottom: 0.5rem;
+        }
+
+        .subcategory-header h3 {
+            font-family: 'Gotu', sans-serif;
+            font-size: 1.3rem;
+            color: #d14642;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Menu Items */
+        .menu-items {
+            margin-bottom: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: none;
+        }
+
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-options {
+            color: #151515;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-weight: 400;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .item-price {
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            min-width: 60px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .price-plus {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #d14642;
+            color: #fdf8f3;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: #b83d39;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .search-container {
+                margin: 1.5rem 0;
+            }
+
+            #search-input {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .tab-nav {
+                gap: 0;
+                overflow-x: auto;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .tab-nav::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab-button {
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .category-header h2 {
+                font-size: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem 0;
+            }
+
+            .item-info {
+                padding-right: 0;
+            }
+
+            .item-price {
+                text-align: left;
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 0.8rem 1.2rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .tab-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="image/Sushi Yun Logo.png" alt="Sushi Yun Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="#" class="active">Menu</a></li>
+                <li><a href="index.html#catering">Catering</a></li>
+                <li><a href="index.html#location">Location</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" style="background: linear-gradient(135deg, #d14642, #ff6b35); padding: 0.5rem 1rem; border-radius: 15px; color: #fdf8f3;">Order Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="menu-header">
+        <h1>MENU</h1>
+    </div>
+
+    <div class="tab-container">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="🔍︎   Search menu items..." onkeyup="searchMenu()">
+        </div>
+
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="showTab('appetizers')">Appetizers</button>
+            <button class="tab-button" onclick="showTab('classic-rolls')">Classic Rolls</button>
+            <button class="tab-button" onclick="showTab('special-rolls')">Special Rolls</button>
+            <button class="tab-button" onclick="showTab('no-rice')">No Rice Rolls</button>
+            <button class="tab-button" onclick="showTab('cooked-rolls')">Cooked Rolls</button>
+            <button class="tab-button" onclick="showTab('nigiri')">Nigiri</button>
+            <button class="tab-button" onclick="showTab('sashimi')">Sashimi</button>
+            <button class="tab-button" onclick="showTab('special-combos')">Special Combos</button>
+            <button class="tab-button" onclick="showTab('noodles')">Noodles</button>
+            <button class="tab-button" onclick="showTab('beverages')">Beverages</button>
+            <button class="tab-button" onclick="showTab('catering')">Catering</button>
+        </div>
+
+        <!-- Appetizers Tab -->
+        <div id="appetizers" class="tab-content active">
+            <div class="category-header">
+                <h2>Appetizers</h2>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Tempura <span class="item-options">( Vegetable and/or Shrimp | Calamari + $1 )</span></div>
+                        <div class="item-description">Lightly fried ingredients served with house dipping sauce</div>
+                    </div>
+                    <div class="item-price">11.95 <span class="price-plus">+</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Edamame <span class="item-options">( Original | Garlic | Spicy Garlic | Cajun )</span></div>
+                        <div class="item-description">Steamed green soybeans served with choice seasoning</div>
+                    </div>
+                    <div class="item-price">5.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Cold Tofu</div>
+                        <div class="item-description">Cubed soft tofu seasoned with soy sauce base and topped with green onion and fried shallots</div>
+                    </div>
+                    <div class="item-price">9.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Agedashi Tofu</div>
+                        <div class="item-description">Fried soft tofu served in a dashi-based broth</div>
+                    </div>
+                    <div class="item-price">11.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Gyoza <span class="item-options">(6 pcs)</span></div>
+                        <div class="item-description">Pan fried pork dumplings</div>
+                    </div>
+                    <div class="item-price">9.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Egg Rolls <span class="item-options">(4 pcs)</span></div>
+                        <div class="item-description">Deep fried vegetable rolls</div>
+                    </div>
+                    <div class="item-price">9.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Spicy Crispy Rice Tuna</div>
+                        <div class="item-description">Deep fried crispy rice topped with spicy tuna</div>
+                    </div>
+                    <div class="item-price">12.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Baked Mussels</div>
+                        <div class="item-description">Broiled green mussels with mayo sauce topped with green onion and fried shallots</div>
+                    </div>
+                    <div class="item-price">12.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Soft Shell Crab</div>
+                        <div class="item-description">Deep fried seasoned soft shell crab</div>
+                    </div>
+                    <div class="item-price">12.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yummy Crackers</div>
+                        <div class="item-description">Spicy tuna with salsa served with fried wonton</div>
+                    </div>
+                    <div class="item-price">12.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Heart Attack</div>
+                        <div class="item-description">Deep fried jalapeño peppers stuffed with spicy tuna and cream cheese topped with our house-made sauce</div>
+                    </div>
+                    <div class="item-price">12.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Kama</div>
+                        <div class="item-description">Grilled seasoned yellowtail collar</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Classic Rolls Tab -->
+        <div id="classic-rolls" class="tab-content">
+            <div class="category-header">
+                <h2>Classic Rolls</h2>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">California</div>
+                        <div class="item-description">Crab, avocado, cucumber</div>
+                    </div>
+                    <div class="item-price">8.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Rainbow</div>
+                        <div class="item-description">Crab meat, avocado and 5 kinds of fish on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Spicy Tuna</div>
+                        <div class="item-description">Spicy tuna with cucumber</div>
+                    </div>
+                    <div class="item-price">9.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Boston <span class="item-options">(6pcs)</span></div>
+                        <div class="item-description">Tuna and avocado with soy paper</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Hawaiian</div>
+                        <div class="item-description">California roll with tuna on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Aloha</div>
+                        <div class="item-description">Spicy tuna, avocado with albacore on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Blondies</div>
+                        <div class="item-description">Spicy crab meat, avocado wrapped in soy paper with yellowtail & jalapeño on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Philadelphia</div>
+                        <div class="item-description">Cream cheese & avocado with salmon on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sapporo</div>
+                        <div class="item-description">Spicy california roll with albacore and yellowtail on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sunkist</div>
+                        <div class="item-description">Spicy tuna & avocado with salmon on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Birdie</div>
+                        <div class="item-description">Spicy tuna & avocado with mango & avocado on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Mexican</div>
+                        <div class="item-description">Spicy crab meat, avocado & cream cheese</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Burrito <span class="item-options">(6pcs)</span></div>
+                        <div class="item-description">Tuna, salmon, avocado, crabmeat wrapped in soy paper</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+
+                <div class="subcategory-header">
+                    <h3>Basic Rolls</h3>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                        <div class="item-description">Fresh tuna with sushi rice</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon</div>
+                        <div class="item-description">Fresh salmon with sushi rice</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yellowtail</div>
+                        <div class="item-description">Fresh yellowtail with sushi rice</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Cucumber</div>
+                        <div class="item-description">Fresh cucumber with sushi rice</div>
+                    </div>
+                    <div class="item-price">4.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Avocado</div>
+                        <div class="item-description">Fresh avocado with sushi rice</div>
+                    </div>
+                    <div class="item-price">4.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Vegetable</div>
+                        <div class="item-description">Cucumber, avocado, carrot, and mixed vegetables</div>
+                    </div>
+                    <div class="item-price">5.95</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Rolls Tab -->
+        <div id="special-rolls" class="tab-content">
+            <div class="category-header">
+                <h2>Special Rolls</h2>
+            </div>
+
+            <div class="subcategory-header">
+                <h3>Chef's Special</h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sophie's</div>
+                        <div class="item-description">Blue crab and avocado with soy paper wrap, crunch flakes, mango and special sauce on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Mimi</div>
+                        <div class="item-description">Spicy tuna, spicy crab meat, shrimp tempura & cream cheese with soy paper, avocado</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Day</div>
+                        <div class="item-description">Spicy crab meat, avocado with seared red snapper, slice fried garlic & house sauce on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Pepcidy</div>
+                        <div class="item-description">Spicy tuna & avocado with seared albacore & fried onion on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yun's Rainbow</div>
+                        <div class="item-description">Shrimp tempura & avocado with 5 different kinds of fish on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Italian Red Snapper</div>
+                        <div class="item-description">Spicy crab meat, shrimp tempura & avocado, seared red snapper, shredded & fried garlic & bacon flavor on top</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+            </div>
+
+            <div class="subcategory-header">
+                <h3>Specialty Rolls</h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Crab Lover</div>
+                        <div class="item-description">Shrimp tempura, avocado, crab meat with spicy crab meat, deep fried soft shell crab on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Cactus Dragon</div>
+                        <div class="item-description">Shrimp tempura & avocado, crab meat with eel & avocado on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Hot Babe</div>
+                        <div class="item-description">Deep fried soft shell crab, avocado, crab meat with crunch tuna, sliced avocado on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Flaming Joy</div>
+                        <div class="item-description">Shrimp tempura, avocado, crab meat with spicy crab meat, cooked shrimp on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Tiger</div>
+                        <div class="item-description">Shrimp tempura, crab meat, avocado with tuna & salmon on top</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Palm Springs</div>
+                        <div class="item-description">Shrimp tempura & avocado inside, mango, tuna & spicy seasoning on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Golden Tiger</div>
+                        <div class="item-description">Cream cheese, avocado & shrimp tempura then deep fried, spicy crab meat & jalapeño on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">French Kiss</div>
+                        <div class="item-description">Shrimp tempura, cream cheese & avocado, crawfish & sea scallop, grape white sauce & crunch flakes on top</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Tsunami</div>
+                        <div class="item-description">Spicy tuna, avocado, cream cheese, then the entire roll is topped with seared red snapper & top fried onions on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">In & Out</div>
+                        <div class="item-description">Spicy tuna roll with tuna on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Ichiban</div>
+                        <div class="item-description">Spicy tuna roll with 5 kinds of fish on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Garlic Albacore</div>
+                        <div class="item-description">California roll with albacore & fried garlic on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Rice Rolls Tab -->
+        <div id="no-rice" class="tab-content">
+            <div class="category-header">
+                <h2>No Rice Rolls</h2>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Love Love</div>
+                        <div class="item-description">Spicy crab meat, spicy tuna wrapped in tuna & avocado</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Pink Lady</div>
+                        <div class="item-description">Spicy crabmeat, spicy tuna wrapped in salmon and avocado</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">OMG Blue Crab</div>
+                        <div class="item-description">Blue crab, avocado with tuna on top, crunch flakes & special sauce on top</div>
+                    </div>
+                    <div class="item-price">18.85</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Oestii</div>
+                        <div class="item-description">Spicy tuna, albacore, avocado, wrapped in cucumber</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Nude Burrito</div>
+                        <div class="item-description">Sashimi, avocado, crab meat, tuna & salmon wrapped with soy paper</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Orange Blue Crab</div>
+                        <div class="item-description">Blue crab, avocado with salmon, crunch flakes & special sauce on top</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Orange Blossom</div>
+                        <div class="item-description">Spicy tuna, spicy crab meat & avocado inside with tuna & salmon on top</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Fireworks</div>
+                        <div class="item-description">Spicy tuna, crab meat, avocado, jalapeño, cream cheese, deep fried and wrapped in tortillas</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cooked Rolls Tab -->
+        <div id="cooked-rolls" class="tab-content">
+            <div class="category-header">
+                <h2>Cooked Rolls</h2>
+            </div>
+
+            <div class="subcategory-header">
+                <h3>Deep Fried Rolls</h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Crazy Boy</div>
+                        <div class="item-description">Deep fried california roll</div>
+                    </div>
+                    <div class="item-price">13.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Super Crunch</div>
+                        <div class="item-description">Spicy crab meat, avocado, soft shell crab with shrimp tempura with soy paper</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Crunch</div>
+                        <div class="item-description">Crab meat, avocado, & shrimp tempura</div>
+                    </div>
+                    <div class="item-price">13.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Calamari Tempura</div>
+                        <div class="item-description">Crab meat, avocado & calamari tempura</div>
+                    </div>
+                    <div class="item-price">14.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Hungry Man</div>
+                        <div class="item-description">Shrimp tempura roll with eel and yellowtail on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Popcorn Lobster</div>
+                        <div class="item-description">California roll with deep fried crawfish & lobster on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Red Bull</div>
+                        <div class="item-description">Shrimp tempura roll with spicy tuna on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon Tempura</div>
+                        <div class="item-description">Crab meat, avocado & deep fried salmon</div>
+                    </div>
+                    <div class="item-price">14.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Spider <span class="item-options">(5pcs)</span></div>
+                        <div class="item-description">Soy, gobo, crab meat, fried soft shell crab</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Spicy Tuna Tempura</div>
+                        <div class="item-description">Deep fried spicy tuna roll</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yun</div>
+                        <div class="item-description">Shrimp tempura roll, avocado & cream cheese</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Veggie Tempura</div>
+                        <div class="item-description">Deep fried 4 kinds of vegetables</div>
+                    </div>
+                    <div class="item-price">13.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Camp Fire</div>
+                        <div class="item-description">Shrimp tempura, crab meat, avocado with shrimp, salmon & yellowtail on top</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Philadelphia Tempura</div>
+                        <div class="item-description">Cream cheese, avocado, salmon tempura & deep fried</div>
+                    </div>
+                    <div class="item-price">14.95</div>
+                </div>
+            </div>
+
+            <div class="subcategory-header">
+                <h3>Baked & Grilled Rolls</h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Baked Salmon</div>
+                        <div class="item-description">California roll with baked salmon on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Beef Teriyaki</div>
+                        <div class="item-description">Grilled beef, avocado</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">BLCR</div>
+                        <div class="item-description">California roll with baked crawfish & lobster on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Caterpillar</div>
+                        <div class="item-description">Crab meat & eel with sliced avocado on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Chicken Teriyaki</div>
+                        <div class="item-description">Grilled chicken breast, avocado</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Dragon</div>
+                        <div class="item-description">California roll with eel on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Dynamite Scallop</div>
+                        <div class="item-description">California roll with baked scallop on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Volcano</div>
+                        <div class="item-description">Spicy tuna & avocado with baked scallop on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon Skin</div>
+                        <div class="item-description">Salmon skin, gobo, avocado</div>
+                    </div>
+                    <div class="item-price">12.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Engage</div>
+                        <div class="item-description">California roll, cream cheese & baked salmon on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Punky Hunky</div>
+                        <div class="item-description">California roll w/ soy paper & baked halibut on top</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nigiri Tab -->
+        <div id="nigiri" class="tab-content">
+            <div class="category-header">
+                <h2>Nigiri</h2>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Toro</div>
+                    </div>
+                    <div class="item-price">MP</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                    </div>
+                    <div class="item-price">7.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yellowtail</div>
+                    </div>
+                    <div class="item-price">7.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Albacore</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Shrimp</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Stick Crab</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sweet Shrimp</div>
+                    </div>
+                    <div class="item-price">12.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Mackeral</div>
+                    </div>
+                    <div class="item-price">5.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Red Snapper</div>
+                    </div>
+                    <div class="item-price">5.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Fresh Water Eel</div>
+                    </div>
+                    <div class="item-price">7.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Surf Clam</div>
+                    </div>
+                    <div class="item-price">7.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Squid</div>
+                    </div>
+                    <div class="item-price">7.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sea Urchin</div>
+                    </div>
+                    <div class="item-price">MP</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Halibut</div>
+                    </div>
+                    <div class="item-price">7.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Octopus</div>
+                    </div>
+                    <div class="item-price">7.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Egg</div>
+                    </div>
+                    <div class="item-price">5.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon Egg</div>
+                    </div>
+                    <div class="item-price">8.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Smelt Egg</div>
+                    </div>
+                    <div class="item-price">6.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sweet Soybean Pocket</div>
+                    </div>
+                    <div class="item-price">5.95</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sashimi Tab -->
+        <div id="sashimi" class="tab-content">
+            <div class="category-header">
+                <h2>Sashimi</h2>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Toro</div>
+                    </div>
+                    <div class="item-price">MP</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Tuna</div>
+                    </div>
+                    <div class="item-price">19.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yellowtail</div>
+                    </div>
+                    <div class="item-price">21.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon</div>
+                    </div>
+                    <div class="item-price">19.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Albacore</div>
+                    </div>
+                    <div class="item-price">19.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Red Snapper</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Halibut</div>
+                    </div>
+                    <div class="item-price">22.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Octopus</div>
+                    </div>
+                    <div class="item-price">20.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Shrimp</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Stick Crab</div>
+                    </div>
+                    <div class="item-price">16.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sweet Shrimp</div>
+                    </div>
+                    <div class="item-price">33.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Mackeral</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Freshwater Eel</div>
+                    </div>
+                    <div class="item-price">25.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Surf Clam</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Squid</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sea Urchin</div>
+                    </div>
+                    <div class="item-price">MP</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Egg</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salmon Egg</div>
+                    </div>
+                    <div class="item-price">21.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Smelt Egg</div>
+                    </div>
+                    <div class="item-price">18.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Mixed Sashimi <span class="item-options">( 16 pcs | 24 pcs )</span></div>
+                    </div>
+                    <div class="item-price">30.95 | 41.95</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Rice Combos Tab -->
+        <div id="special-combos" class="tab-content">
+            <div class="category-header">
+                <h2>Special Combos</h2>
+            </div>
+            <div class="subcategory-header">
+                <h3>Sushi & Maki Combo</h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Hand Roll Combo <span class="item-options">( 3 pcs )</span></div>
+                        <div class="item-description">Includes California, Spicy Tuna, and Crunch roll</div>
+                    </div>
+                    <div class="item-price">15.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Maki Combo <span class="item-options">( 18 pcs )</span></div>
+                        <div class="item-description">Includes California, Spicy Tuna, and Crunch roll</div>
+                    </div>
+                    <div class="item-price">17.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Tokyo Combo <span class="item-options">( 16 pcs )</span></div>
+                        <div class="item-description">Includes California and Chef's Choice sushi</div>
+                    </div>
+                    <div class="item-price">19.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Shogun Combo <span class="item-options">( 16 pcs )</span></div>
+                        <div class="item-description">Includes Spicy Tuna roll and Chef's Choice sushi</div>
+                    </div>
+                    <div class="item-price">20.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yun Combo <span class="item-options">( 18 pcs )</span></div>
+                        <div class="item-description">Includes Crunch roll and Chef's Choice Sushi</div>
+                    </div>
+                    <div class="item-price">21.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sushi & Sashimi Combo <span class="item-options">( 16 pcs )</span></div>
+                        <div class="item-description">Includes Chef's Choice Sushi and Sashimi</div>
+                    </div>
+                    <div class="item-price">27.95</div>
+                </div>
+            </div>
+            <div class="subcategory-header">
+                <h3>Rice Combo <span class="item-options">( Served with white rice, salad, and miso soup )</span></h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">2 Item Combo | 3 Item Combo</div>
+                        <div class="item-description">Chicken Teriyaki, Beef Teriyaki, Salmon Teriyaki, Chicken Katsu, Pork Katsu,</div>
+                        <div class="item-description">Gyoza, Crunch Roll, Veggie Roll, California Roll, Spicy Tuna Roll, Mixed Tempura,</div>
+                        <div class="item-description"><b> 4 pcs Mixed Sushi, 4 pcs Mixed Sashimi ( + $1.55 extra )</b> </div>
+                    </div>
+                    <div class="item-price">19.95 + | 22.95 +</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Noodles Tab -->
+        <div id="noodles" class="tab-content">
+            <div class="category-header">
+                <h2>Noodles</h2>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Udon<span class="item-options"> ( Original | Chicken + $2 | Veggie | Tempura | Beef + $2 | Seafood + $4 )</span></div>
+                        <div class="item-description">Thick wheat noodles in savory broth with protein of choice</div>
+                    </div>
+                    <div class="item-price">13.95 +</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yaki Udon<span class="item-options"> ( Veggie | Chicken + $2 | Beef + $2 | Seafood + $4 )</span></div>
+                        <div class="item-description">Stir-fried udon noodles in a savory sauce served with choice of protein</div>
+                    </div>
+                    <div class="item-price">13.95 +</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yaki Soba<span class="item-options"> ( Veggie | Chicken + $2 | Beef + $2 | Seafood + $4 )</span></div>
+                        <div class="item-description">Stir-fried soba noodles in a savory sauce served with choice of protein</div>
+                    </div>
+                    <div class="item-price">13.95 +</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beverages Tab -->
+        <div id="beverages" class="tab-content">
+            <div class="category-header">
+                <h2>Beverages</h2>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Hot Green Tea</div>
+                        <div class="item-description">Traditional Japanese sencha</div>
+                    </div>
+                    <div class="item-price">3.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Iced Green Tea</div>
+                        <div class="item-description">Refreshing cold-brewed green tea</div>
+                    </div>
+                    <div class="item-price">3.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Sake <span class="item-options">(Hot/Cold)</span></div>
+                        <div class="item-description">Premium Japanese rice wine</div>
+                    </div>
+                    <div class="item-price">8.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Japanese Soda</div>
+                        <div class="item-description">Ramune, Orange, or Grape</div>
+                    </div>
+                    <div class="item-price">4.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Soft Drinks</div>
+                        <div class="item-description">Coke, Sprite, Orange, Root Beer</div>
+                    </div>
+                    <div class="item-price">2.95</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catering Tab -->
+        <div id="catering" class="tab-content">
+            <div class="category-header">
+                <h2>Catering</h2>
+            </div>
+
+            <div class="subcategory-header">
+                <h3>Party Platters</h3>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Cali Land <span class="item-options">(64 pcs)</span></div>
+                        <div class="item-description">Perfect starter platter featuring our signature California rolls</div>
+                    </div>
+                    <div class="item-price">49.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yun Special 1 <span class="item-options">(40 pcs Sushi and Rainbow Roll)</span></div>
+                        <div class="item-description">Chef's selection of fresh sushi paired with our popular Rainbow roll</div>
+                    </div>
+                    <div class="item-price">149.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yun Special 2 <span class="item-options">(60 pcs Sushi and Rainbow, 24 pcs Cali Roll)</span></div>
+                        <div class="item-description">Extensive sushi selection with Rainbow roll and California roll combination</div>
+                    </div>
+                    <div class="item-price">119.95</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Yun Special 3 <span class="item-options">(64 pcs Sushi Special and Customer's Choice)</span></div>
+                        <div class="item-description">Premium sushi selection with your choice of specialty rolls</div>
+                    </div>
+                    <div class="item-price">119.95</div>
+                </div>
+            </div>
+
+            <div style="background: #fff; padding: 2rem; border-radius: 15px; margin: 2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <p style="font-size: 1.1rem; color: #333; line-height: 1.6; margin-bottom: 1rem;">
+                    <strong>All party platters can be ordered in-store</strong>
+                </p>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                    Perfect for parties, weddings, special events, meetings, and conferences. Our fresh ingredients and authentic flavors will make your event memorable.
+                </p>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                    <strong>Advance Notice:</strong> Please place catering orders at least 24 hours in advance to ensure availability and freshness.
+                </p>
+                <p style="color: #666; line-height: 1.6;">
+                    <strong>Custom Orders:</strong> Need something special? Contact us to discuss custom party platter options tailored to your event needs.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-button">← Back to Home</a>
+
+    <script>
+        // Check for URL parameters on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+
+            if (tab) {
+                showTab(tab);
+            }
+        });
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show the selected tab content
+            const targetTab = document.getElementById(tabName);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            // Add active class to the corresponding button
+            const targetButton = Array.from(tabButtons).find(button =>
+                button.textContent.toLowerCase().replace(/\s+/g, '-').replace('rolls', 'rolls') === tabName ||
+                button.onclick.toString().includes(tabName)
+            );
+
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
+
+            // Clear search when switching tabs
+            document.getElementById('search-input').value = '';
+            showAllItems();
+        }
+
+        function searchMenu() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const allMenuItems = document.querySelectorAll('.menu-item');
+
+            if (searchTerm === '') {
+                showAllItems();
+                return;
+            }
+
+            // Hide all items first
+            allMenuItems.forEach(item => {
+                item.style.display = 'none';
+            });
+
+            // Hide all subcategory headers
+            const subcategoryHeaders = document.querySelectorAll('.subcategory-header');
+            subcategoryHeaders.forEach(header => {
+                header.style.display = 'none';
+            });
+
+            let hasResults = false;
+
+            // Show items that match the search term
+            allMenuItems.forEach(item => {
+                const itemName = item.querySelector('.item-name').textContent.toLowerCase();
+                const itemDescription = item.querySelector('.item-description');
+                const description = itemDescription ? itemDescription.textContent.toLowerCase() : '';
+
+                if (itemName.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    hasResults = true;
+                }
+            });
+
+            // Show all tab contents when searching
+            if (hasResults) {
+                const tabContents = document.querySelectorAll('.tab-content');
+                tabContents.forEach(content => {
+                    content.classList.add('active');
+                });
+
+                // Remove active class from all tab buttons during search
+                const tabButtons = document.querySelectorAll('.tab-button');
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+            } else {
+                // If no results, show a message (you can customize this)
+                console.log('No items found matching: ' + searchTerm);
+            }
+        }
+
+        function showAllItems() {
+            const allMenuItems = document.querySelectorAll('.menu-item');
+            const subcategoryHeaders = document.querySelectorAll('.subcategory-header');
+
+            // Show all items
+            allMenuItems.forEach(item => {
+                item.style.display = 'flex';
+            });
+
+            // Show all subcategory headers
+            subcategoryHeaders.forEach(header => {
+                header.style.display = 'block';
+            });
+
+            // Hide all tab contents except the active one
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show the first tab by default or keep current active tab
+            const activeButton = document.querySelector('.tab-button.active');
+            if (activeButton) {
+                const tabName = activeButton.textContent.toLowerCase().replace(/\s+/g, '-').replace('rolls', 'rolls');
+                const tabMap = {
+                    'appetizers': 'appetizers',
+                    'classic-rolls': 'classic-rolls',
+                    'special-rolls': 'special-rolls',
+                    'no-rice-rolls': 'no-rice',
+                    'cooked-rolls': 'cooked-rolls',
+                    'nigiri': 'nigiri',
+                    'sashimi': 'sashimi',
+                    'special-combos': 'special-combos',
+                    'noodles': 'noodles',
+                    'catering': 'catering',
+                    'beverages': 'beverages'
+                };
+                const targetTab = tabMap[tabName] || 'appetizers';
+                const tab = document.getElementById(targetTab);
+                if (tab) {
+                    tab.classList.add('active');
+                }
+            } else {
+                document.getElementById('appetizers').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

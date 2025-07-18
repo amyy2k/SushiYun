@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi Yun & Poke - Authentic Japanese Fusion | Orange, CA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto:wght@400&family=Gotu:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+          font-family: 'Gotu', sans-serif;
+          line-height: 1.6;
+          color: #333;
+          overflow-x: hidden;
+          /* Bamboo roller pattern */
+          background: url("data:image/svg+xml,%3Csvg width='60' height='80' viewBox='0 0 60 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='bamboo' x='0' y='0' width='60' height='80' patternUnits='userSpaceOnUse'%3E%3Crect width='60' height='80' fill='%23fdf8f3'/%3E%3Cg fill='%23d4b896' fill-opacity='0.12'%3E%3Crect x='0' y='8' width='60' height='2'/%3E%3Crect x='0' y='18' width='60' height='2'/%3E%3Crect x='0' y='28' width='60' height='2'/%3E%3Crect x='0' y='38' width='60' height='2'/%3E%3Crect x='0' y='48' width='60' height='2'/%3E%3Crect x='0' y='58' width='60' height='2'/%3E%3Crect x='0' y='68' width='60' height='2'/%3E%3Crect x='0' y='78' width='60' height='2'/%3E%3C/g%3E%3Cg fill='%23c4a584' fill-opacity='0.08'%3E%3Crect x='10' y='0' width='1' height='80'/%3E%3Crect x='25' y='0' width='1' height='80'/%3E%3Crect x='40' y='0' width='1' height='80'/%3E%3Crect x='55' y='0' width='1' height='80'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23bamboo)'/%3E%3C/svg%3E");
+          background-repeat: repeat;
+          background-size: 120px 160px;
+          background-color: #fdf8f3;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, var(--overlay-opacity, 0));
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: #151515;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fdf8f3;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: url('image/cozy.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+            transform: translateY(var(--bg-parallax, 0px));
+        }
+
+        .hero-logo {
+            max-width: 500px;
+            width: 90%;
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            animation: fadeInScale 1.2s ease;
+            transition: all 0.3s ease;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .hero-title {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .hero-title h1 {
+            font-family: 'Aboreto', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInLeft 1s ease 0.5s both;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
+            border-bottom: 4px solid white;
+        }
+
+        .hero-title .subtitle {
+            font-family: 'Gotu', sans-serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: fadeInLeft 1s ease 0.8s both;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #d14642;
+            color: #fdf8f3;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-family: 'Gotu', sans-serif;
+            transition: all 0.3s ease;
+            animation: fadeInLeft 1s ease 1.1s both;
+            text-shadow: none;
+        }
+
+        .cta-button:hover {
+            background: #e58e2d;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+
+        }
+
+        .about-text h2 {
+            font-family: 'Aboreto', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .about-image {
+            background: url('image/people.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 95%;
+            height: 400px;
+            border: 10px solid #ff6b35;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fdf8f3;
+            font-size: 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3); /* dark overlay */
+            z-index: 0;
+        }
+
+
+        /* Meet Sophia Section */
+        .meet-sophia {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .sophia-image {
+            background: linear-gradient(135deg, #d14642, #ff6b35);
+            height: 450px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fdf8f3;
+            font-size: 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sophia-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle fill="white" opacity="0.05" cx="80" cy="120" r="40"/><circle fill="white" opacity="0.08" cx="320" cy="280" r="60"/><circle fill="white" opacity="0.03" cx="200" cy="350" r="80"/></svg>');
+        }
+
+        .sophia-text h2 {
+            font-family: 'Aboreto', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .sophia-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .highlight {
+            color: #d14642;
+            font-weight: bold;
+        }
+
+        /* Menu Gallery */
+        .menu-gallery {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .menu-gallery h2 {
+            font-family: 'Aboreto', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            background: #fdf8f3;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .gallery-item-image {
+            height: 250px;
+            background-size: contain; /* Zoomed out to fit entire image */
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fdf8f3;
+            position: relative;
+            background-size: 100%;
+
+        }
+
+
+        .gallery-item-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-item h3 {
+            color: #d14642;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .gallery-item p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Chopstick Decoration */
+        .chopstick-decoration {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .chopstick-image {
+            width: 500px;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            margin-right: -20px;
+        }
+
+        /* Soy Sauce Decoration */
+        .soysauce-decoration {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .soysauce-image {
+            width: 800px;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            margin-left: -20px;
+        }
+
+        /* Menu Preview */
+        .menu-preview {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .menu-preview h2 {
+            font-family: 'Aboreto', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: #fdf8f3;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Catering Section */
+        .catering {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .catering-text h2 {
+            font-family: 'Aboreto', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .catering-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .catering-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .catering-features li {
+            color: #666;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .catering-features li::before {
+            content: "✓";
+            color: #d14642;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .catering-image {
+          background: url('image/catering.png');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          opacity: 90%;
+          height: 450px;
+          border: 10px solid #ff6b35;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fdf8f3;
+          font-size: 1.2rem;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .catering-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle fill="white" opacity="0.08" cx="100" cy="100" r="60"/><circle fill="white" opacity="0.05" cx="300" cy="200" r="80"/><circle fill="white" opacity="0.1" cx="200" cy="350" r="50"/></svg>');
+        }
+
+        .catering-cta {
+            background: #d14642;
+            color: #fdf8f3;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .catering-cta:hover {
+            background: #b83d39;
+            transform: translateY(-2px);
+        }
+
+        /* Location Section */
+        .location {
+            background: #fdf8f3;
+            padding: 1rem 5%;
+            margin: 0 auto;
+            text-align: center;
+            border-top: 3px solid #d14642;
+            margin-top: 3rem;
+        }
+
+        .location h2 {
+            font-family: 'Aboreto', serif;
+            font-size: 5rem;
+            color: #2c3e50;
+            padding: 1rem 2rem;
+            display: inline-block;
+        }
+
+        .location-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: #fdf8f3;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #d14642;
+            color: #fdf8f3;
+            text-align: center;
+            padding: 3rem 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: #ff6b35;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-title .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-title {
+                bottom: 5%;
+                left: 2%;
+            }
+
+            .hero-logo {
+                max-width: 300px;
+            }
+
+            .about, .meet-sophia, .catering {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-text h2, .sophia-text h2, .catering-text h2 {
+                font-size: 2rem;
+            }
+
+            nav {
+                padding: 1rem 2%;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chopstick-decoration {
+                padding: 1rem 0;
+                height: 80px;
+            }
+
+            .chopstick-image {
+                width: 150px;
+                margin-right: -10px;
+            }
+
+            .soysauce-decoration {
+                padding: 1rem 0;
+                height: 80px;
+            }
+
+            .soysauce-image {
+                width: 120px;
+                margin-left: -10px;
+            }
+
+            .scroll-animate-right {
+                transform: translateX(50px);
+            }
+
+            .hero {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll animation from right */
+        .scroll-animate-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="logo">
+              <img src="image/Sushi Yun Logo.png" alt="Sushi Yun Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Menu</a></li>
+                <li><a href="#catering">Catering</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" style="background: linear-gradient(135deg, #d14642, #ff6b35); padding: 0.5rem 1rem; border-radius: 15px; color: #fdf8f3;">Order Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-title">
+                <h1>Taste of Japan from our Hands</h1>
+                <p class="subtitle">Traditional Sushi • Signature Classics • High Quality Fish</p>
+                <a href="menu.html" class="cta-button">Explore Our Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about scroll-animate" id="about">
+        <div class="about-text">
+            <h2>Our Story</h2>
+            <p>Sushi Yun has proudly served the City of Orange since 2009. As a <span class="highlight">woman-owned establishment</span>, we take pride in offering a warm, welcoming atmosphere where every guest is treated like family. With always-available happy hour specials, signature rolls, and a wide selection of cooked options, there's something for everyone to enjoy.</p>
+            <p>We deeply value our regulars who make our continued success possible. If there's something special you'd like that's not on the menu, just ask our sushi chef — we'll be happy to make it for you.</p>
+        </div>
+        <div class="about-image">
+
+        </div>
+    </section>
+
+    <section class="meet-sophia scroll-animate" id="sophia">
+        <div class="sophia-image">
+            <div style="position: relative; z-index: 1;">
+                <h3>Owner & Executive Chef</h3>
+                <p>Passionate about Japanese cuisine</p>
+            </div>
+        </div>
+        <div class="sophia-text">
+            <h2>Meet Sophia</h2>
+            <p>As the <span class="highlight">owner and executive chef</span> of Sushi Yun, Sophia brings over 15 years of culinary expertise and an unwavering passion for authentic Japanese cuisine to every dish we serve.</p>
+            <p>Born in Korea and inspired by the precision and artistry of Japanese culinary traditions, Sophia moved to Orange County with a vision to create a space where quality and care come first. Her meticulous approach and commitment to sourcing only the finest cuts of fish have earned Sushi Yun a loyal following.</p>
+        </div>
+
+    </section>
+
+    <div class="chopstick-decoration scroll-animate-right">
+        <img src="image/sushichopstick.webp" alt="Chopsticks with sushi" class="chopstick-image">
+    </div>
+
+
+    <section class="menu-gallery scroll-animate" id="gallery">
+        <h2>Our Menu</h2>
+        <div class="gallery-grid">
+            <a href="menu.html?tab=special-rolls" class="gallery-item">
+              <div class="gallery-item-image" style="background-image: url('image/sushi4.png');"></div>
+                <div class="gallery-item-content">
+                    <h3>Chef's Signature Rolls</h3>
+                    <p>A curated selection of the day's finest fish, expertly prepared by our master sushi chef.</p>
+                </div>
+            </a>
+            <a href="menu.html?tab=nigiri" class="gallery-item">
+                  <div class="gallery-item-image" style="background-image: url('image/sushi3.png');"></div>
+                <div class="gallery-item-content">
+                    <h3>Nigiri</h3>
+                    <p>Premium cuts of fresh fish delicately placed over seasoned bite-sized sushi rice.</p>
+                </div>
+            </a>
+            <a href="menu.html?tab=classic-rolls" class="gallery-item">
+              <div class="gallery-item-image" style="background-image: url('image/sushi9.png');"></div>
+                <div class="gallery-item-content">
+                    <h3>Classic Rolls</h3>
+                    <p>A variety of chef-crafted classic rolls combining fresh ingredients with bold, crowd-pleasing flavors.</p>
+                </div>
+            </a>
+            <a href="menu.html?tab=appetizers" class="gallery-item">
+              <div class="gallery-item-image" style="background-image: url('image/sushi2.png');"></div>
+                <div class="gallery-item-content">
+                    <h3>Special Appetizers</h3>
+                    <p>A curated selection of small bites made to excite your taste buds before the main course.</p>
+                </div>
+            </a>
+            <a href="menu.html?tab=sashimi" class="gallery-item">
+              <div class="gallery-item-image" style="background-image: url('image/sushi11.png');"></div>
+                <div class="gallery-item-content">
+                    <h3>Premium Sashimi</h3>
+                    <p>The finest cuts of tuna, salmon, yellowtail, and seasonal catches, served pristine and fresh.</p>
+                </div>
+            </a>
+            <a href="menu.html?tab=special-combos" class="gallery-item">
+              <div class="gallery-item-image" style="background-image: url('image/sushi5.png');"></div>
+                <div class="gallery-item-content">
+                    <h3>Hearty Combos</h3>
+                    <p>Delicious, cooked entrees served with rice and miso soup—crafted for a warm and satisfying meal.</p>
+                </div>
+            </a>
+        </div>
+        <a href="menu.html" class="cta-button">View All</a>
+    </section>
+
+    <section class="catering scroll-animate" id="catering">
+        <div class="catering-text">
+            <h2>Catering Services</h2>
+            <p>Bring the authentic taste of Sushi Yun to your special events, corporate meetings, and celebrations. Our catering service offers the same quality and attention to detail that our restaurant guests have come to love.</p>
+            <ul class="catering-features">
+                <li>Custom sushi platters and sets</li>
+                <li>Vegetarian and cooked options available</li>
+                <li>Professional presentation and setup</li>
+                <li>Accommodates groups from 10 to 200+ people</li>
+                <li>Fresh preparation on the day of your event</li>
+            </ul>
+            <p>For more information or to place a catering order, please give us a call!</p>
+            <a href="#contact" class="catering-cta">Request Catering Quote</a>
+        </div>
+        <div class="catering-image">
+            <div style="position: relative; z-index: 1;">
+            </div>
+        </div>
+    </section>
+
+    <section class="location scroll-animate" id="location">
+        <h2>Visit Us Today</h2>
+        <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">Located in the heart of Orange, California</p>
+
+        <div class="location-info">
+            <div class="info-card">
+                <h3>Address</h3>
+                <p>3505 East Chapman Avenue<br>Suite E<br>Orange, CA 92869</p>
+            </div>
+            <div class="info-card">
+                <h3>Hours</h3>
+                <p>Monday - Saturday: 11:30 AM - 9:30 PM<br>
+                Sunday: 5:00 PM - 9:00 PM</p>
+            </div>
+            <div class="info-card">
+                <h3>Contact</h3>
+                <p>Phone: (714) 744-0008<br>
+                Reservations Welcome</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+          <h3>Experience Authentic Japanese Cuisine</h3>
+          <div class="social-links">
+              <a href="#" aria-label="Instagram">
+                  <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" style="height: 24px; width: 24px; filter: brightness(0) invert(1);">
+              </a>
+              <a href="#" aria-label="Facebook">
+                  <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="height: 24px; width: 24px; filter: brightness(0) invert(1);">
+              </a>
+              <a href="#" aria-label="Yelp">
+                  <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/yelp.svg" alt="Yelp" style="height: 24px; width: 24px; filter: brightness(0) invert(1);">
+              </a>
+          </div>
+
+
+            <p>&copy; 2025 Sushi Yun. All rights reserved.</p>
+            <p>Fresh ingredients • Master craftsmanship • Unforgettable experience</p>
+        </div>
+    </footer>
+
+    <script>
+        // COMPLETELY ISOLATED - No transforms that could affect header
+        window.addEventListener('scroll', function() {
+            const scrollY = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+
+            if (hero) {
+                const heroHeight = hero.offsetHeight;
+                const scrollProgress = Math.min(scrollY / heroHeight, 1);
+
+                // ONLY background parallax - isolated to ::before element
+                const bgParallax = scrollY * 0.5;
+                hero.style.setProperty('--bg-parallax', `${bgParallax}px`);
+
+                // ONLY overlay darkness
+                const overlayOpacity = scrollProgress * 0.4;
+                hero.style.setProperty('--overlay-opacity', overlayOpacity);
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.scroll-animate-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effects to menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Enhanced hover effects for gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 15px 35px rgba(0,0,0,0.15)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            });
+        });
+    </script>
+</body>
+</html>
