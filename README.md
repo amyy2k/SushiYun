@@ -3,8 +3,7 @@
 Welcome to the official website repository for **Sushi Yun**, a modern Japanese fusion restaurant located in Orange, California. This site serves as a digital menu, contact hub, and ordering platform for both in-person diners and online customers.
 
 ## 🌐 Live Demo
-TBA
-
+https://amyy2k.github.io/SushiYun/
 ---
 
 ## 📌 Features
